@@ -1,34 +1,67 @@
-document.onkeydown = function (v) {
-    if (v.ctrlKey && (v.keyCode === 0x43 || v.keyCode === 0x56 || v.keyCode === 0x55 || v.keyCode === 0x75)) {}
-    if (v.shiftKey && (event.button == 0x2 || event.button == 0x3)) {}
-    return false;
-  };
-  function click() {
-    if (event.button == 0x2 || event.button == 0x3) {
-      oncontextmenu = "return false";
-      function check() {
+// anti-inspect.js
+
+(function() {
+    const threshold = 100;
+
+    // Function to check if DevTools is open
+    function detectDevTools() {
+        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+
+        if (widthThreshold || heightThreshold) {
+            window.location = 'about:blank';
+        }
+    }
+
+    // Check repeatedly at an interval
+    setInterval(detectDevTools, 1);
+
+    // Detect F12 and Ctrl+Shift+I key presses
+    document.onkeydown = function(e) {
+        if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+            window.location = 'about:blank';
+        }
+
+        // Prevent Ctrl+C, Ctrl+V, Ctrl+U, Ctrl+Shift+I
+        if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 73)) {
+            return false;
+        }
+    };
+
+    // Prevent Shift+Right Click and Middle Click
+    document.onmousedown = function(e) {
+        if ((e.shiftKey && (e.button === 2 || e.button === 3)) || (e.button === 2 || e.button === 3)) {
+            oncontextmenu = "return false";
+            return false;
+        }
+    };
+
+    document.oncontextmenu = function() {
+        return false;
+    };
+
+    function check() {
         if (document.body.addEventListener) {
-          document.body.addEventListener('DOMMouseScroll', stop, false);
+            document.body.addEventListener('DOMMouseScroll', stop, false);
         }
         document.body.onmousewheel = stop;
-      }
-      function stop(v) {
-        if (!v) {
-          v = window.event;
-        }
-        if (v.stopPropagation) {
-          v.stopPropagation();
-        } else {
-          v.cancelBubble = true;
-        }
-        if (v.preventDefault) {
-          v.preventDefault();
-        } else {
-          v.returnValue = false;
-        }
-      }
-      check();
     }
-  }
-  document.onmousedown = click;
-  document.oncontextmenu = new Function("return false;");
+
+    function stop(e) {
+        if (!e) {
+            e = window.event;
+        }
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        } else {
+            e.cancelBubble = true;
+        }
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
+    }
+
+    check();
+})();
