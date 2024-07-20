@@ -14,7 +14,7 @@
     }
 
     // Check repeatedly at an interval
-    setInterval(detectDevTools, 1);
+    setInterval(detectDevTools, 100);
 
     // Detect F12 and Ctrl+Shift+I key presses
     document.onkeydown = function(e) {
