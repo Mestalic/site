@@ -1,4 +1,4 @@
-// anti-inspect.js
+
 
 (function() {
     const threshold = 500;
@@ -64,4 +64,22 @@
     }
 
     check();
+
+    // Function to go fullscreen
+    function goFullscreen() {
+        const element = document.documentElement;
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.mozRequestFullScreen) { // Firefox
+            element.mozRequestFullScreen();
+        } else if (element.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            element.webkitRequestFullscreen();
+        } else if (element.msRequestFullscreen) { // IE/Edge
+            element.msRequestFullscreen();
+        }
+    }
+
+    // Add event listener to detect any click
+    document.addEventListener('click', goFullscreen, { once: true });
+
 })();
