@@ -1,7 +1,7 @@
 // anti-inspect.js
 
 (function() {
-    const threshold = 100;
+    const threshold = 500;
 
     // Function to check if DevTools is open
     function detectDevTools() {
