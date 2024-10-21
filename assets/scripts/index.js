@@ -1,7 +1,54 @@
 "use strict";
 
 $(document).ready(function () {
-  // Function to preload assets (images, videos, music)
+    // Add the loading overlay with jumping letters and glowing effect
+    $("body").append(`
+      <style>
+        @keyframes jump {
+          0% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+          100% { transform: translateY(0); }
+        }
+  
+        .letter {
+          display: inline-block;
+          animation: jump 1s infinite;
+          animation-delay: calc(0.1s * var(--i));
+          text-shadow: 0 0 10px white, 0 0 20px white;
+          color: white;
+          font-size: 24px;
+        }
+  
+        #loading-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: black;
+          z-index: 10000;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      </style>
+  
+      <div id="loading-overlay">
+        <div id="loading-text">
+          <span class="letter" style="--i:1">L</span>
+          <span class="letter" style="--i:2">O</span>
+          <span class="letter" style="--i:3">A</span>
+          <span class="letter" style="--i:4">D</span>
+          <span class="letter" style="--i:5">I</span>
+          <span class="letter" style="--i:6">N</span>
+          <span class="letter" style="--i:7">G</span>
+          <span class="letter" style="--i:8">.</span>
+          <span class="letter" style="--i:9">.</span>
+          <span class="letter" style="--i:10">.</span>
+        </div>
+      </div>
+    `);
+
   function preloadAssets(assets) {
     assets.forEach((asset) => {
       const type = asset.split('.').pop(); // Get file extension to determine type
@@ -22,7 +69,8 @@ $(document).ready(function () {
   // Preload all assets before running the rest of the script
   const resources = {
     images: [
-      "/assets/media/1713206537673.png" // Example profile image
+      "/assets/media/channels4_profile.jpg",
+      "/assets/media/1713206537673.png"
     ],
     videos: [
       "/assets/media/yoshicity.mp4",
