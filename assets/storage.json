@@ -6,15 +6,11 @@
     "songUrls": [
         "/assets/media/yoshicity.mp3",
         "/assets/media/marblephone.mp3",
-        "/assets/media/Solarflare.mp3",
-        "/assets/media/y2mate.is_-_Yung_Lean_Kyoto-tMgkt9jdjTU-192k-1712180647.mp3",
         "/assets/media/Gatorade.mp3"
     ],
     "vidUrls": [
         "/assets/media/yoshicity.mp4",
         "/assets/media/marblephone.mp4",
-        "/assets/media/Solarflare.mp4",
-        "/assets/media/y2mate.is_-_Yung_Lean_Kyoto-tMgkt9jdjTU-480pp-1712180639.mp4",
         "/assets/media/Gatorade.mp4"
     ]
 }
